@@ -1,0 +1,150 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "a897b7351416021b709feec9d9a51d5d",
+    "entities": [
+      {
+        "tableName": "flights",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`flight_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `place_from` TEXT NOT NULL, `place_to` TEXT NOT NULL, `departure_date` TEXT NOT NULL, `arrival_date` TEXT NOT NULL, `departure_time` TEXT NOT NULL, `arrival_time` TEXT NOT NULL, `airport_from` TEXT NOT NULL, `airport_to` TEXT NOT NULL, `travel_time` REAL NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "flight_id",
+            "columnName": "flight_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "place_from",
+            "columnName": "place_from",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "place_to",
+            "columnName": "place_to",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "departure_date",
+            "columnName": "departure_date",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "arrival_date",
+            "columnName": "arrival_date",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "departure_time",
+            "columnName": "departure_time",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "arrival_time",
+            "columnName": "arrival_time",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "airport_from",
+            "columnName": "airport_from",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "airport_to",
+            "columnName": "airport_to",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "travel_time",
+            "columnName": "travel_time",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "flight_id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "tickets",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ticket_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `fl_id` INTEGER NOT NULL, `price` REAL NOT NULL, `klass` TEXT NOT NULL, `luggage` INTEGER NOT NULL, `status` TEXT NOT NULL, FOREIGN KEY(`fl_id`) REFERENCES `flights`(`flight_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "ticket_id",
+            "columnName": "ticket_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fl_id",
+            "columnName": "fl_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "price",
+            "columnName": "price",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "klass",
+            "columnName": "klass",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "luggage",
+            "columnName": "luggage",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "ticket_id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "flights",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "fl_id"
+            ],
+            "referencedColumns": [
+              "flight_id"
+            ]
+          }
+        ]
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a897b7351416021b709feec9d9a51d5d')"
+    ]
+  }
+}
